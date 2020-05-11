@@ -9,9 +9,9 @@ import (
 	"io/ioutil"
 	"net/http"
 
-	"github.com/tmdvs/Go-Emoji-Utils/utils"
+	"github.com/zgsdharry/Go-Emoji-Utils/utils"
 
-	"github.com/tmdvs/Go-Emoji-Utils"
+	"github.com/zgsdharry/Go-Emoji-Utils"
 
 	"github.com/PuerkitoBio/goquery"
 )
