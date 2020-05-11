@@ -85,30 +85,17 @@ func RemoveAll(input string) string {
 	// Find all the emojis in this string
 	matches := FindAll(input)
 
-	// Make a list of the indexes of all the runes used for emoji characters
-	emojiRunes := []int{}
-	for _, match := range matches {
-		for _, loc := range match.Locations {
-			for i := loc[0]; i <= loc[1]; i++ {
-				emojiRunes = append(emojiRunes, i)
-			}
-		}
-	}
+	for _, item := range matches {
+		emo := item.Match.(Emoji)
+		rs := []rune(emo.Value)
 
-	// Loop over the input strings runes
-	runes := []rune(input)
-	for i := len(runes); i >= 0; i-- {
-
-		// Loop through the runes indexes used for emoji
-		for _, e := range emojiRunes {
-			// If the current rune is an emoji rune we'll remove it
-			if i == e {
-				runes = append(runes[:i-1], runes[i:]...)
-			}
+		for _, r := range rs {
+			var deleter = strings.NewReplacer(string(r), "")
+			input = deleter.Replace(input)
 		}
+		
 	}
 
 	// Remove and trim and left over whitespace
-	return strings.TrimSpace(strings.Join(strings.Fields(string(runes)), " "))
-	//return input
+	return strings.TrimSpace(strings.Join(strings.Fields(input), " "))
 }
